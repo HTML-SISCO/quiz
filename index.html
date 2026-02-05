@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SisQuiz | Sisco Group India</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="logo small">Sis<span>Quiz</span></h1>
+            <nav class="nav-links" id="dynamic-nav"></nav>
+        </div>
+    </header>
+
+    <div class="blob"></div>
+    <div id="app">
+        <section class="glass-card" data-tilt>
+            <h1 class="logo">Sis<span>Quiz</span></h1>
+            <p style="color: #aaa; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 20px;">A PRODUCT OF SISCO GROUP INDIA</p>
+            <p style="color: #ccc; margin-bottom: 30px;">Experience the next generation of interactive learning.</p>
+            <button class="btn main-btn pulse" onclick="checkAuth()">ENTER THE GRID</button>
+        </section>
+    </div>
+
+    <footer class="brand-footer">POWERED BY <span>SISCO GROUP INDIA</span></footer>
+
+    <script>
+        function checkAuth() {
+            const user = localStorage.getItem('sis_user');
+            window.location.href = user ? 'quiz.html' : 'login.html';
+        }
+        function updateHeader() {
+            const user = localStorage.getItem('sis_user');
+            const avatar = localStorage.getItem('sis_avatar') || "🚀";
+            const nav = document.getElementById('dynamic-nav');
+            nav.innerHTML = `<a href="index.html" class="active">Home</a><a href="about.html">About</a>` + 
+                (user ? `<a href="quiz.html">Missions</a><a href="profile.html">${avatar} ${user}</a>` 
+                      : `<a href="login.html">Login</a><a href="signup.html">Join</a>`);
+        }
+        updateHeader();
+    </script>
+</body>
+</html>
