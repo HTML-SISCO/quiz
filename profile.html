@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | SisQuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="logo small">Sis<span>Quiz</span></h1>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="quiz.html">Missions</a>
+                <a href="profile.html" class="active">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="blob"></div>
+    <div id="app">
+        <section class="glass-card">
+            <div class="profile-header">
+                <div id="prof-av" style="font-size: 4rem; margin-bottom: 10px;">🚀</div>
+                <h2 id="prof-name">Recruit</h2>
+                <p id="rank-tag" style="color: var(--primary); font-size: 0.8rem; letter-spacing: 2px; margin-top: 5px;">RANK: PENDING</p>
+            </div>
+
+            <div class="stats-grid" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 15px;">
+                <div class="stat-box">
+                    <p style="font-size: 0.7rem; color: #aaa;">TOTAL POINTS</p>
+                    <h3 id="total-pts">0</h3>
+                </div>
+            </div>
+
+            <div id="history">
+                <h4 style="text-align: left; font-size: 0.9rem; margin-bottom: 10px; border-bottom: 1px solid var(--border);">Mission Records</h4>
+                <div id="prof-score-list" style="text-align: left;"></div>
+            </div>
+
+            <button class="btn" style="margin-top: 20px; color: #ff1744; border-color: #ff1744;" onclick="logout()">Logout</button>
+        </section>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const user = localStorage.getItem('sis_user');
+            const avatar = localStorage.getItem('sis_avatar') || "🚀";
+            const scores = JSON.parse(localStorage.getItem('sis_scores')) || {};
+
+            if(!user) { window.location.href = 'signup.html'; return; }
+
+            // Update UI
+            document.getElementById('prof-name').innerText = user;
+            document.getElementById('prof-av').innerText = avatar;
+
+            // Calculate Rank
+            const totalPoints = Object.values(scores).reduce((a, b) => a + b, 0);
+            document.getElementById('total-pts').innerText = totalPoints;
+
+            let rank = "RECRUIT";
+            if(totalPoints > 100) rank = "GRANDMASTER";
+            else if(totalPoints > 50) rank = "ELITE";
+            else if(totalPoints > 20) rank = "SPECIALIST";
+            document.getElementById('rank-tag').innerText = `RANK: ${rank}`;
+
+            // List History
+            const list = document.getElementById('prof-score-list');
+            const entries = Object.entries(scores);
+            list.innerHTML = entries.length ? entries.map(([cat, score]) => `
+                <div style="display:flex; justify-content:space-between; padding: 5px 0; font-size: 0.8rem;">
+                    <span>${cat}</span>
+                    <span style="color:var(--primary)">${score} Pts</span>
+                </div>
+            `).join('') : "<p style='color:#555; font-size:0.8rem;'>No missions recorded.</p>";
+        };
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
