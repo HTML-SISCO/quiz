@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>Login | SisQuiz</title>
+    <meta charset="UTF-8">
+    <title>Login | SisQuiz</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 </head>
 <body>
     <div class="blob"></div>
     <div id="app">
-        <section class="glass-card">
-            <h2 class="logo">Log<span>in</span></h2>
-            <input type="text" id="user" placeholder="Enter Registered ID" class="auth-input">
-            <button class="btn main-btn" onclick="login()">SYNC DATA</button>
-            <p style="margin-top:15px; font-size:0.8rem;">No ID found? <a href="signup.html" style="color:var(--primary)">Join Here</a></p>
+        <section class="glass-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+            <h2 class="logo">Sis<span>Quiz</span></h2>
+            <p>Authentication Required</p>
+            <div class="input-group">
+                <input type="text" id="user" placeholder="Username" class="auth-input">
+                <input type="password" placeholder="Password" class="auth-input">
+            </div>
+            <button class="btn main-btn" onclick="auth()">Login to Grid</button>
+            <p class="switch-text">New Recruit? <a href="signup.html">Create ID</a></p>
         </section>
     </div>
     <script>
-        function login() {
-            const u = document.getElementById('user').value.trim();
-            const saved = localStorage.getItem('sis_user');
-            if(u === saved && u !== "") { window.location.href = 'quiz.html'; }
-            else { alert("ID not recognized. Please Sign Up first."); window.location.href = 'signup.html'; }
+        function auth() {
+            const name = document.getElementById('user').value;
+            if(name.trim() !== "") {
+                localStorage.setItem('sis_user', name);
+                window.location.href = 'index.html';
+            } else { alert("Enter a valid ID"); }
         }
     </script>
 </body>
