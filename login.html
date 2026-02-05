@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Login | SisQuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob"></div>
+    <div id="app">
+        <section class="glass-card">
+            <h2 class="logo">Log<span>in</span></h2>
+            <input type="text" id="user" placeholder="Enter Registered ID" class="auth-input">
+            <button class="btn main-btn" onclick="login()">SYNC DATA</button>
+            <p style="margin-top:15px; font-size:0.8rem;">No ID found? <a href="signup.html" style="color:var(--primary)">Join Here</a></p>
+        </section>
+    </div>
+    <script>
+        function login() {
+            const u = document.getElementById('user').value.trim();
+            const saved = localStorage.getItem('sis_user');
+            if(u === saved && u !== "") { window.location.href = 'quiz.html'; }
+            else { alert("ID not recognized. Please Sign Up first."); window.location.href = 'signup.html'; }
+        }
+    </script>
+</body>
+</html>
