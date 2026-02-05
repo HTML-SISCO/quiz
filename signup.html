@@ -2,48 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Join | Sisco Group India</title>
+    <title>Sign Up | SisQuiz</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 </head>
 <body>
     <div class="blob secondary"></div>
     <div id="app">
-        <section class="glass-card">
-            <h2 class="logo">Sign <span>Up</span></h2>
-            <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 15px;">Recruit Registration</p>
-            
-            <div class="avatar-picker" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
-                <span class="avatar-opt" onclick="selAv('🚀', this)" style="font-size: 1.5rem; cursor: pointer; padding: 5px; border-radius: 50%;">🚀</span>
-                <span class="avatar-opt" onclick="selAv('🤖', this)" style="font-size: 1.5rem; cursor: pointer; padding: 5px; border-radius: 50%;">🤖</span>
-                <span class="avatar-opt" onclick="selAv('🛸', this)" style="font-size: 1.5rem; cursor: pointer; padding: 5px; border-radius: 50%;">🛸</span>
+        <section class="glass-card" data-tilt>
+            <h2 class="logo">Sis<span>Quiz</span></h2>
+            <p>Register New Recruit</p>
+            <div class="input-group">
+                <input type="text" id="new-user" placeholder="Create Username" class="auth-input">
+                <input type="email" placeholder="Email Address" class="auth-input">
+                <input type="password" placeholder="Password" class="auth-input">
             </div>
-
-            <input type="text" id="new-user" placeholder="Username" class="auth-input">
-            <input type="password" id="p1" placeholder="Password" class="auth-input">
-            <input type="password" id="p2" placeholder="Confirm Password" class="auth-input">
-            
-            <button class="btn main-btn" onclick="register()">Create ID</button>
-            <p style="font-size: 0.8rem; margin-top: 15px;">Already registered? <a href="login.html" style="color: var(--primary);">Login</a></p>
+            <button class="btn main-btn" onclick="reg()">Initialize ID</button>
+            <p class="switch-text">Already have an ID? <a href="login.html">Login</a></p>
         </section>
     </div>
-
     <script>
-        let chosenAv = "🚀";
-        function selAv(icon, el) {
-            chosenAv = icon;
-            document.querySelectorAll('.avatar-opt').forEach(a => a.style.background = "none");
-            el.style.background = "rgba(0, 242, 255, 0.2)";
-        }
-        function register() {
-            const u = document.getElementById('new-user').value;
-            const pass1 = document.getElementById('p1').value;
-            const pass2 = document.getElementById('p2').value;
-            if(u && pass1 === pass2) {
-                localStorage.setItem('sis_user', u);
-                localStorage.setItem('sis_avatar', chosenAv);
-                window.location.href = 'quiz.html';
-            } else { alert("Check your inputs!"); }
+        function reg() {
+            const name = document.getElementById('new-user').value;
+            if(name.trim() !== "") {
+                localStorage.setItem('sis_user', name);
+                window.location.href = 'index.html';
+            } else { alert("Fill in all fields"); }
         }
     </script>
 </body>
 </html>
+
