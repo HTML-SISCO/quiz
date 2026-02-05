@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions | SisQuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1 class="logo small">Sis<span>Quiz</span></h1>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="quiz.html" class="active">Missions</a>
+                <a href="profile.html">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="blob"></div>
+    <div id="app">
+        <section id="main-game" class="glass-card">
+            <div class="nav-header">
+                <span id="user-display">ID: Recruit</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+            
+            <div id="game-container">
+                <div id="category-box">
+                    <h3 style="color:var(--primary); font-size: 0.9rem; margin-bottom: 5px;">COMMAND CENTER</h3>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.8rem;">Select a training module.</p>
+                    <div id="cat-list"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
